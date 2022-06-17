@@ -1,0 +1,73 @@
+.Name{
+    background-color: #3e637b;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    color: white;
+
+}
+hr{
+	color: black;
+}
+.userDetails{
+	text-align: center;
+	width: auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+    margin: auto;
+    margin-top: 6%;
+	font-size: 25px;
+	border-radius: 25px;
+	background-color: white;
+	
+}
+.details,.address{
+	padding-bottom: 10px;
+	align-self: center;
+	width: 50%;
+	margin-left: 25%;
+	border-radius: 25px;
+	
+}
+.details1{
+	background-color: #97eaaa;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	border-radius: 25px;
+	
+}
+.address1{
+	background-color: #94d0ed;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	border-radius: 25px;
+	
+}
+.button1{
+	background-color: #026cbb;
+	width: 40%;
+	text-align: center;
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+   	border-radius: 25px;
+	color:white;
+	font-size: 20px;
+	text-decoration: none;	
+}
+.button2{
+	background-color: #fc8874;
+	width: 40%;
+	text-align: center;
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+   	border-radius: 25px;
+	color:white;
+	font-size: 20px;
+	text-decoration: none;	
+}
+.span{
+	margin: 10px;
+}
