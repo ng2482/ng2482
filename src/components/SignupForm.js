@@ -7,24 +7,26 @@ import HeaderComponent from "./HeaderComponent";
 
 const SignupForm = () => {
 
-    const [errorMessages, setErrorMessages] = useState({});
+    const [errorMessages, setErrorMessages] = useState('');
     const [userName, setUserName] = useState('');
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
-    const [error, setError] = useState('');
+    const [unameError, setUnameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [passError, setPassError] = useState(false);
+    const [cPassError, setCPassError] = useState(false);
+    const [unameErrorMessage, setUnameErrorMessage] = useState('');
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [passErrorMessage, setPassErrorMessage] = useState('');
+    const [cPassErrorMessage, setCPassErrorMessage] = useState('');
     const navigate = useNavigate();
 
 
-    const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error1">{errorMessages.message}</div>
-    );
 
     const onSignup = async event => {
         event.preventDefault();
-        if(error ==='true'){
+        if(unameError & emailError & passError & cPassError){
             const user = {
                 userName : userName,
                 fullName : fullName,
@@ -54,6 +56,9 @@ const SignupForm = () => {
             navigate("/login");
             
         }
+        else{
+            setErrorMessages('enter valid details')
+        }
         
     }
 
@@ -61,12 +66,12 @@ const SignupForm = () => {
         setEmail(e.target.value)
     
         if (!validator.isEmail(e.target.value)) {
-            setErrorMessages({name:"email",message: 'enter valid email'})
-            setError('false');
+            setEmailErrorMessage('enter valid email')
+            setEmailError(false);
         }
         else{
-            setErrorMessages({name:"email",message: ''})
-            setError('true');
+            setEmailErrorMessage('')
+            setEmailError(true);
         }
     }
 
@@ -80,16 +85,16 @@ const SignupForm = () => {
         )
         if(!validator.isLength(e.target.value,{
             min : 6 , max : 10})){
-            setErrorMessages({name:"userName",message: 'username should be min 6 and max 10'});
-            setError('false');
+            setUnameErrorMessage('username should be min 6 and max 10');
+            setUnameError(false);
         }
         else if(userDetails != null){
-            setErrorMessages({name:"userName",message: 'username already exist'});
-            setError('false');
+            setUnameErrorMessage('username already exist');
+            setUnameError(false);
         }
         else{
-            setErrorMessages({name:"userName",message: ''})
-            setError('true');
+            setUnameErrorMessage('')
+            setUnameError(true);
         }
     }
 
@@ -98,12 +103,24 @@ const SignupForm = () => {
 
         if(!validator.isStrongPassword(e.target.value,{
             minLength:8,minLowercase:1,minUppercase:1,minNumbers:1,minSymbols:1})){
-            setErrorMessages({name:"password",message: 'password should contain atleast 1 lowercase, 1 uppercase, 1 numerical, 1 special charecter and length min 8'})
-            setError('false');
+            setPassErrorMessage('password should contain atleast 1 lowercase, 1 uppercase, 1 numerical, 1 special charecter and length min 8')
+            setPassError(false);
         }
         else{
-            setErrorMessages({name:"password",message: ''})
-            setError('true');
+            setPassErrorMessage('')
+            setPassError(true);
+        }
+    }
+
+    const validateCPassword = (e) => {
+
+        if(password !== e.target.value){
+            setCPassErrorMessage("Password deosn't match")
+            setCPassError(false);
+        }
+        else{
+            setCPassErrorMessage('')
+            setCPassError(true);
         }
     }
 
@@ -116,7 +133,9 @@ const SignupForm = () => {
 
             <form className='form' onSubmit={onSignup}>
                 <div className='register-Form'>
-                {renderErrorMessage("user")}
+                <h6 className="error">
+                    <div className="error1">{errorMessages}</div>
+                </h6>
 
 
                     <h1 align="center">Sign Up</h1>
@@ -126,18 +145,17 @@ const SignupForm = () => {
 
                     <label><b>UserName</b></label>
                     <input type="text" className='register' placeholder='userName' name='userName'
-                        onChange={e=>validateUserName(e)} required/>
-                    {renderErrorMessage("userName")}
+                        onChange={e=>validateUserName(e)} on required/>
+                    <div className="error1">{unameErrorMessage}</div>
 
                     <label><b>Full Name</b></label>
                     <input type="text" className='register' placeholder='fullName' name='fullName'
                          onChange={e=>validName(e)} required/>
-                    {renderErrorMessage("fname")}
 
                     <label><b>Email</b></label>
                     <input type="text" className='register' placeholder='email' name='email'
                         onChange={(e)=>validateEmail(e)} required/>
-                    {renderErrorMessage("email")}
+                    <div className="error1">{emailErrorMessage}</div>
                     {/* <label><b>Email</b></label>
                     <input type="text" className='register' placeholder='abc.@' name='email'
                         onChange={e => this.email = e.target.value}/> */}
@@ -145,10 +163,15 @@ const SignupForm = () => {
                     <label><b>Password</b></label>
                     <input type="password" className='register' placeholder='password' name='password'
                         onChange={(e)=>validatePassword(e)} required/>
-                    {renderErrorMessage("password")}                
+                    <div className="error1">{passErrorMessage}</div>
                     {/* <label><b>Confirm Password</b></label>
                     <input type="password" className='register' placeholder='password' name='confirmpassword'
                         onChange={e => this.confirmpassword = e.target.value}/> */}
+
+                    <label><b>Confirm Password</b></label>
+                    <input type="password" className='register' placeholder='re-enter password' name='password'
+                        onChange={(e)=>validateCPassword(e)} required/>
+                    <div className="error1">{cPassErrorMessage}</div>
                     
                     <button className='regBtn'>Sign Up</button>
                 </div>

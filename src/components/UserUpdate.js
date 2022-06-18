@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import validator from 'validator';
 import {useNavigate} from 'react-router-dom';
 import LoginService from '../service/LoginService';
+import HeaderComponent from "./HeaderComponent";
 
 const UserUpdate = () => {
 
-    const [errorMessages, setErrorMessages] = useState({});
+    const [errorMessages, setErrorMessages] = useState('');
     const [dob, setDob] = useState('');
     const [fullName, setFullName] = useState('');
     const [gender, setGender] = useState('');
@@ -18,15 +19,16 @@ const UserUpdate = () => {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [pincode, setPincode] = useState('');
-
-    const [error, setError] = useState('');
+    const [emailError, setEmailError] = useState(false);
+    const [numError, setNumError] = useState(false);
+    const [pinError, setPinError] = useState(false);
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [numErrorMessage, setNumErrorMessage] = useState('');
+    const [pinErrorMessage, setPinErrorMessage] = useState('');
     const navigate = useNavigate();
 
 
-    const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error1">{errorMessages.message}</div>
-    );
+    
 
     useEffect(()=>{
         LoginService.getDetails(LoginService.id).then(
@@ -51,7 +53,7 @@ const UserUpdate = () => {
 
     const onUpdate = async event => {
         event.preventDefault();
-        if(error ==='true'){
+        if(emailError & numError & pinError){
             const user = {
                 userName : LoginService.id,
                 fullName : fullName,
@@ -79,6 +81,9 @@ const UserUpdate = () => {
             navigate("/profile");
             
         }
+        else{
+            setErrorMessages('enter valid details')
+        }
         
     }
 
@@ -86,24 +91,24 @@ const UserUpdate = () => {
         setEmail(e.target.value)
     
         if (!validator.isEmail(e.target.value)) {
-            setErrorMessages({name:"email",message: 'enter valid email'})
-            setError('false');
+            setEmailErrorMessage('enter valid email')
+            setEmailError(false);
         }
         else{
-            setErrorMessages({name:"email",message: ''})
-            setError('true');
+            setEmailErrorMessage('')
+            setEmailError(true);
         }
     }
 
     const validMobile_no = (e) => {
         setMobile_no(e.target.value)
         if(e.target.value.length>10 || e.target.value.length<10 ){
-            setErrorMessages({name:"mobile_no",message: 'enter valid number'})
-            setError('false');
+            setNumErrorMessage('enter valid number')
+            setNumError(false);
         }
         else{
-            setErrorMessages({name:"mobile_no",message: ''})
-            setError('true');
+            setNumErrorMessage('')
+            setNumError(true);
         }
     }
 
@@ -111,12 +116,12 @@ const UserUpdate = () => {
         setPincode(e.target.value)
 
         if(e.target.value.length>6 || e.target.value.length<6){
-            setErrorMessages({name:"pincode",message: 'enter valid Pincode'})
-            setError('false');
+            setPinErrorMessage('enter valid Pincode')
+            setPinError(false);
         }
         else{
-            setErrorMessages({name:"pincode",message: ''})
-            setError('true');
+            setPinErrorMessage('')
+            setPinError(true);
         }
     }
 
@@ -156,10 +161,13 @@ const UserUpdate = () => {
 
     return(
         <div>
+        <HeaderComponent userName = {LoginService.id}></HeaderComponent>
+
             <form className='form' onSubmit={onUpdate}>
                 <div className='register-Form'>
-                {renderErrorMessage("user")}
-
+                <h6 className="error">
+                    <div className="error1">{errorMessages}</div>
+                </h6>
 
                     <h1 align="center">Update Profile</h1>
                     <p align="center">Please enter userName and password</p>
@@ -168,12 +176,11 @@ const UserUpdate = () => {
                     <label><b>Full Name</b></label>
                     <input type="text" value={fullName} className='register' placeholder='fullName' name='fullName'
                          onChange={e=>validName(e)} required/>
-                    {renderErrorMessage("fname")}
 
                     <label><b>Email</b></label>
                     <input type="text" value={email} className='register' placeholder='email' name='email'
                         onChange={(e)=>validateEmail(e)} required/>
-                    {renderErrorMessage("email")}
+                    <div className="error1">{emailErrorMessage}</div>
                     
                     <label><b>Gender</b></label>
                     <select className='register' onChange={(e)=>validGender(e)} id="roleDropMenu" name="gender">
@@ -188,7 +195,7 @@ const UserUpdate = () => {
 
                     <label htmlFor="mobile_no"><b>Mobile No</b></label>
                     <input type="number" value={mobile_no} className='register' name="mobile_no" onChange={(e)=>validMobile_no(e)} required></input>
-                    {renderErrorMessage("mobile_no")}    
+                    <div className="error1">{numErrorMessage}</div>
                     
                     <br/><br/>
                     <p><b>Address</b></p>
@@ -210,7 +217,7 @@ const UserUpdate = () => {
                     
                     <label htmlFor="address.pincode"><b>Pin Code</b></label>
                     <input type="text" value={pincode} className='register' onChange={(e)=>validPin(e)} name="address.pincode" required/>
-                    {renderErrorMessage("pincode")}    
+                    <div className="error1">{pinErrorMessage}</div>
                     
                     <button className='regBtn'>Update</button>
                 </div>
