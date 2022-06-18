@@ -6,7 +6,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 5px;
-    padding-top: 5%;
     width: 99%;
     margin: auto;
 
@@ -44,6 +43,7 @@
     color: #7e7e7c;
     font-size: 15px;
     margin: 1px;
+    border-radius: 25px;
 }
 
 .card1 .add1 {
@@ -67,7 +67,7 @@
 }
 
 .remove1 {
-    background-color: #fc8874;
+    background-color: #ee6a63fb;
     border: 1px solid black;
     width: 20%;
     text-align: center;
@@ -76,7 +76,7 @@
     padding-right: 5px;
     padding-bottom: 5px;
     border-radius: 25px;
-    color: black;
+    color: white;
     text-decoration: none;
     margin-left: 10px;
     margin-right: 10px;
@@ -92,7 +92,7 @@
     padding-right: 5px;
     padding-bottom: 5px;
     border-radius: 25px;
-    color: black;
+    color: white;
     text-decoration: none;
     margin-left: 10px;
     margin-right: 10px;

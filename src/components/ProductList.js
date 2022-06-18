@@ -47,7 +47,7 @@ class ProductList extends Component {
                                     <img className="cardImg" src={`./image/${product.image}`} alt="Card image cap"></img>
                                     <div className="cardBody">
                                         <h5 className="card-title" >{product.productName}</h5>
-                                        <h6 className="price">{product.price}</h6>
+                                        <h6 className="price">${product.price}</h6>
                                         <h6 className="category">{product.productType}</h6>
                                         <div className="add">
                                             <button className="button" onClick={() => this.addToCart(product.productId, product.productName)} type="submit">Add to cart</button>
@@ -57,7 +57,6 @@ class ProductList extends Component {
                         )
                     }
                 </div>
-                <h1>{this.state.user}</h1>
             </div>
         );
     }

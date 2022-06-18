@@ -98,7 +98,6 @@ export default class CartList extends Component {
                             )}
                     </div>
                     <br />
-                    <br />
                     <div className="remove2">
                         <button className="remove3" onClick={() => this.placeOrder()} >Order</button>
 
