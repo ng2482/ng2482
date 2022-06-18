@@ -26,7 +26,7 @@ class HeaderComponent extends Component {
                         <nav>
                             <span className="logo"> E-ShoppingZone</span>
                             <Link to={'/'} >Home</Link>
-                            <Link to={'/'} >Cart</Link>
+                            <Link to={'/cart'} >Cart</Link>
                             <Link to={'/'} >Order</Link>
                             <Link to={'/profile'} >{this.state.user}</Link>
                             <Link to={'/login'}>login</Link>

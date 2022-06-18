@@ -31,6 +31,7 @@ function UserDelete(){
             setErrorMessages({ name:"pass", message: errors.pass });
           } else {
             LoginService.deleteUser(uname.value)
+            LoginService.userId("Profile")
             setIsSubmitted(true);   
             alert(`Deleted ${userDetails.data.fullName}`);
 

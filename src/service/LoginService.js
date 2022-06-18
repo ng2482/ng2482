@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const productList_url = "http://localhost:9001/user/";
+const user_url = "http://localhost:9001/user/";
 class LoginService  {
     constructor() {
         this.id = "Profile";
@@ -10,13 +10,17 @@ class LoginService  {
         this.id = id;
     }
      
+    addUser(user){
+        axios.post(user_url+"new/register",user)
+    }
+
     async getDetails(username){
-        var userDetails =  await axios.get(productList_url+`${username}`);
+        var userDetails =  await axios.get(user_url+`${username}`);
         return userDetails;
     }
 
     deleteUser(userName){
-        axios.delete(productList_url+`delete/${userName}`)
+        axios.delete(user_url+`delete/${userName}`)
     }
     
 }

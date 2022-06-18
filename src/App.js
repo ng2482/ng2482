@@ -7,6 +7,7 @@ import SignupForm from './components/SignupForm';
 import UserDetails from './components/UserDetails';
 import UserDelete from './components/UserDelete';
 import UserUpdate from './components/UserUpdate';
+import CartList from './components/CartList';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
               <Route path='/profile' element={<UserDetails/>}></Route>
               <Route path='/update' element={<UserUpdate/>}></Route>              
               <Route path='/delete' element={<UserDelete/>}></Route>
+              <Route path='/cart' element={<CartList/>}></Route>
 
             </Routes>  
           </div>  

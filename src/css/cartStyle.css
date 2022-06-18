@@ -1,85 +1,75 @@
-body {
-    padding-bottom: 3%;
-    background-color: #3e637b;
-}
-
-.collection {
+.collection1 {
     padding-top: 15%;
 }
 
-.contant {
+.contant1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 5px;
     padding-top: 5%;
-    margin-top: 0.5%;
+    width: 99%;
+    margin: auto;
 
 }
 
-.card {
+.card1 {
     border: 1px black solid;
     border-radius: 25px;
 
 }
 
-.card:nth-child(even) {
+.card1:nth-child(even) {
     background-color: #d3e6e6;
 }
 
-.card:nth-child(odd) {
+.card1:nth-child(odd) {
     background-color: white;
 }
 
-.card img {
-    width: 100%;
-    height: 70%;
-    border-radius: 25px;
-
-
-}
-
-.card .card-title {
+.card1 .card1-title {
     text-align: center;
     font-size: 25px;
     margin: 1px;
 }
 
-.card .price {
+.card1 .price1 {
     text-align: center;
     color: #7e7e7c;
     font-size: 15px;
     margin: 1px;
 }
 
-.card .category {
+.card1 .category1 {
     text-align: center;
     color: #7e7e7c;
     font-size: 15px;
     margin: 1px;
 }
 
-.card .add {
+.card1 .add1 {
     width: 100%;
     background-color: #74f288;
     text-align: center;
     align-content: center;
 }
 
-.head {
+.head1 {
     background-color: white;
-    width: 100%;
+    width: 99%;
     border-radius: 25px;
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
-    margin-top: 10px;
+    margin: auto;
+    margin-top: 7%;
     margin-bottom: 10px;
 
 }
 
-.remove {
+.remove1 {
     background-color: #fc8874;
-    width: 40%;
+    border: 1px solid black;
+    width: 20%;
     text-align: center;
     padding-top: 5px;
     padding-left: 5px;
@@ -88,9 +78,27 @@ body {
     border-radius: 25px;
     color: black;
     text-decoration: none;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-.button {
+.remove3 {
+    background-color: #026cbb;
+    border: 1px solid black;
+    width: 20%;
+    text-align: center;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    border-radius: 25px;
+    color: black;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.button1 {
     width: 100%;
     background-color: #74f288;
     border: 0px;
