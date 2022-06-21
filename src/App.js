@@ -9,6 +9,7 @@ import UserDelete from './components/UserDelete';
 import UserUpdate from './components/UserUpdate';
 import CartList from './components/CartList';
 import Logout from './components/Logout';
+import { PaytmButton } from './components/paytmButton';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
               <Route path='/delete' element={<UserDelete />}></Route>
               <Route path='/cart' element={<CartList />}></Route>
               <Route path='/logout' element={<Logout />}></Route>
+              <Route path='/pay' element={<PaytmButton />}></Route>
 
 
             </Routes>
