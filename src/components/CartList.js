@@ -3,7 +3,7 @@ import CartService from '../service/CartService';
 import LoginService from '../service/LoginService';
 import HeaderComponent from './HeaderComponent';
 import '../css/cartStyle.css'
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default class CartList extends Component {
     constructor(props) {
@@ -64,7 +64,6 @@ export default class CartList extends Component {
     }
 
     placeOrder() {
-        axios.post(`http://localhost:9005/submitPaymentDetail/by2900/900/by2900`)
     }
 
     render() {
@@ -99,7 +98,7 @@ export default class CartList extends Component {
                     </div>
                     <br />
                     <div className="remove2">
-                        <button className="remove3" onClick={() => this.placeOrder()} >Order</button>
+                        <Link className="remove3" to={"/pay"} >Order</Link>
 
                         <button className="remove1" onClick={() => this.clearCart()}>Clear</button>
                     </div>
