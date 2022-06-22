@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import validator from 'validator';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import LoginService from '../service/LoginService';
 import HeaderComponent from "./HeaderComponent";
 
@@ -19,18 +19,18 @@ const UserUpdate = () => {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [pincode, setPincode] = useState('');
-    const [emailError, setEmailError] = useState(false);
-    const [numError, setNumError] = useState(false);
-    const [pinError, setPinError] = useState(false);
+    const [emailError, setEmailError] = useState(true);
+    const [numError, setNumError] = useState(true);
+    const [pinError, setPinError] = useState(true);
     const [emailErrorMessage, setEmailErrorMessage] = useState('');
     const [numErrorMessage, setNumErrorMessage] = useState('');
     const [pinErrorMessage, setPinErrorMessage] = useState('');
     const navigate = useNavigate();
 
 
-    
 
-    useEffect(()=>{
+
+    useEffect(() => {
         LoginService.getDetails(LoginService.id).then(
             res => {
                 const user = res.data
@@ -48,53 +48,53 @@ const UserUpdate = () => {
                 setPincode(address.pincode)
             }
         )
-    },[])
+    }, [])
 
 
     const onUpdate = async event => {
         event.preventDefault();
-        if(emailError & numError & pinError){
+        if (emailError & numError & pinError) {
             const user = {
-                userName : LoginService.id,
-                fullName : fullName,
-                email : email,
-                gender : gender,
-                dob : dob,
-                mobile_no : mobile_no,
-                address : {
-                    house_no : house_no,
-                    street_name : street_name,
-                    colony_name : colony_name,
-                    city : city,
-                    state : state,
-                    pincode : pincode
+                userName: LoginService.id,
+                fullName: fullName,
+                email: email,
+                gender: gender,
+                dob: dob,
+                mobile_no: mobile_no,
+                address: {
+                    house_no: house_no,
+                    street_name: street_name,
+                    colony_name: colony_name,
+                    city: city,
+                    state: state,
+                    pincode: pincode
                 }
             }
 
-            await axios.put(`http://localhost:9001/user/update/${LoginService.id}`,user).then(res => {
+            await axios.put(`http://localhost:9001/user/update/${LoginService.id}`, user).then(res => {
                 console.log(res);
             });
 
-            
-            
+
+
             alert("Updated Successful");
             navigate("/profile");
-            
+
         }
-        else{
+        else {
             setErrorMessages('enter valid details')
         }
-        
+
     }
 
     const validateEmail = (e) => {
         setEmail(e.target.value)
-    
+
         if (!validator.isEmail(e.target.value)) {
             setEmailErrorMessage('enter valid email')
             setEmailError(false);
         }
-        else{
+        else {
             setEmailErrorMessage('')
             setEmailError(true);
         }
@@ -102,11 +102,11 @@ const UserUpdate = () => {
 
     const validMobile_no = (e) => {
         setMobile_no(e.target.value)
-        if(e.target.value.length>10 || e.target.value.length<10 ){
+        if (e.target.value.length > 10 || e.target.value.length < 10) {
             setNumErrorMessage('enter valid number')
             setNumError(false);
         }
-        else{
+        else {
             setNumErrorMessage('')
             setNumError(true);
         }
@@ -115,11 +115,11 @@ const UserUpdate = () => {
     const validPin = (e) => {
         setPincode(e.target.value)
 
-        if(e.target.value.length>6 || e.target.value.length<6){
+        if (e.target.value.length > 6 || e.target.value.length < 6) {
             setPinErrorMessage('enter valid Pincode')
             setPinError(false);
         }
-        else{
+        else {
             setPinErrorMessage('')
             setPinError(true);
         }
@@ -157,68 +157,68 @@ const UserUpdate = () => {
 
 
 
-    
 
-    return(
+
+    return (
         <div>
-        <HeaderComponent userName = {LoginService.id}></HeaderComponent>
+            <HeaderComponent userName={LoginService.id}></HeaderComponent>
 
             <form className='form' onSubmit={onUpdate}>
                 <div className='register-Form'>
-                <h6 className="error">
-                    <div className="error1">{errorMessages}</div>
-                </h6>
+                    <h6 className="error">
+                        <div className="error1">{errorMessages}</div>
+                    </h6>
 
                     <h1 align="center">Update Profile</h1>
-                    <p align="center">Please enter userName and password</p>
+                    <p align="center">Please enter required Details</p>
                     <hr></hr>
 
                     <label><b>Full Name</b></label>
                     <input type="text" value={fullName} className='register' placeholder='fullName' name='fullName'
-                         onChange={e=>validName(e)} required/>
+                        onChange={e => validName(e)} required />
 
                     <label><b>Email</b></label>
                     <input type="text" value={email} className='register' placeholder='email' name='email'
-                        onChange={(e)=>validateEmail(e)} required/>
+                        onChange={(e) => validateEmail(e)} required />
                     <div className="error1">{emailErrorMessage}</div>
-                    
+
                     <label><b>Gender</b></label>
-                    <select className='register' onChange={(e)=>validGender(e)} id="roleDropMenu" name="gender">
+                    <select className='register' onChange={(e) => validGender(e)} id="roleDropMenu" name="gender">
                         <option value={gender}>{gender}</option>
                         <option value="Male">male</option>
                         <option value="Female">female</option>
-                        <option value="Other">other</option>      
+                        <option value="Other">other</option>
                     </select>
 
                     <label htmlFor="dob"><b>Date of Birth</b></label>
-                    <input type="date" value={dob} className='register' name ="dob" onChange={(e)=>validDob(e)} required></input>
+                    <input type="date" value={dob} className='register' name="dob" onChange={(e) => validDob(e)} required></input>
 
                     <label htmlFor="mobile_no"><b>Mobile No</b></label>
-                    <input type="number" value={mobile_no} className='register' name="mobile_no" onChange={(e)=>validMobile_no(e)} required></input>
+                    <input type="number" value={mobile_no} className='register' name="mobile_no" onChange={(e) => validMobile_no(e)} required></input>
                     <div className="error1">{numErrorMessage}</div>
-                    
-                    <br/><br/>
+
+                    <br /><br />
                     <p><b>Address</b></p>
-                    <hr/>
+                    <hr />
                     <label htmlFor="address.house_no"><b>House No</b></label>
-                    <input type="text" value={house_no} className='register' onChange={(e)=>validHouse_no(e)} name="address.house_no" required/>
-                    
+                    <input type="text" value={house_no} className='register' onChange={(e) => validHouse_no(e)} name="address.house_no" required />
+
                     <label htmlFor="address.street_name"><b>Street</b></label>
-                    <input type="text" value={street_name} className='register' onChange={(e)=>validStreet_name(e)} name="address.street_name" required/>
-                    
+                    <input type="text" value={street_name} className='register' onChange={(e) => validStreet_name(e)} name="address.street_name" required />
+
                     <label htmlFor="address.colony_name"><b>Colony</b></label>
-                    <input type="text" value={colony_name} className='register' onChange={(e)=>validColony_name(e)} name="address.colony_name" required/>
-                    
+                    <input type="text" value={colony_name} className='register' onChange={(e) => validColony_name(e)} name="address.colony_name" required />
+
                     <label htmlFor="address.city"><b>City</b></label>
-                    <input type="text" value={city} className='register' onChange={(e)=>validCity(e)} name="address.city" required/>
-                    
+                    <input type="text" value={city} className='register' onChange={(e) => validCity(e)} name="address.city" required />
+
                     <label htmlFor="address.state"><b>State</b></label>
-                    <input type="text" value={state} className='register' onChange={(e)=>validState(e)} name="address.state" required/>
-                    
+                    <input type="text" value={state} className='register' onChange={(e) => validState(e)} name="address.state" required />
+
                     <label htmlFor="address.pincode"><b>Pin Code</b></label>
-                    <input type="text" value={pincode} className='register' onChange={(e)=>validPin(e)} name="address.pincode" required/>
+                    <input type="text" value={pincode} className='register' onChange={(e) => validPin(e)} name="address.pincode" required />
                     <div className="error1">{pinErrorMessage}</div>
-                    
+
                     <button className='regBtn'>Update</button>
                 </div>
             </form>

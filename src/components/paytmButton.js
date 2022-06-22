@@ -187,10 +187,10 @@ export function PaytmButton() {
 
 
               <label><b>OrderId</b></label>
-              <input type="text" className='register' defaultValue={paymentData.order} />
+              <input type="text" className='register' value={paymentData.order} />
 
               <label><b>Amount</b></label>
-              <input type="text" className='register' defaultValue={paymentData.amount} />
+              <input type="text" className='register' value={paymentData.amount} />
 
               <button className="regBtn2" onClick={makePayment}>Pay Now</button>
             </div>

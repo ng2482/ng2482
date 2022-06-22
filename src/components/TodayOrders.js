@@ -12,63 +12,85 @@ export class TodayOrders extends Component {
         this.state = {
             order: [],
             productlist: [],
+            empty: false
         }
     }
     componentDidMount() {
         OrderService.getUserOrder(LoginService.id).then(res => {
-            console.log(res)
-            this.setState({ order: res.data });
-            this.setState({ productlist: res.data.items })
+            if (res.data.items !== null) {
+                this.setState({ order: res.data });
+                this.setState({ productlist: res.data.items })
+                this.setState({ empty: true })
+            }
 
         }
         );
     }
 
-    clearOrder() {
-        OrderService.deleteOrder(LoginService.id)
-    }
-
-
-
     render() {
-        return (
-            <div>
-                <HeaderComponent userName={LoginService.id}></HeaderComponent>
-                {this.state.order.map(
-                    order =>
+        if (LoginService.id !== "Profile") {
+            if (this.state.empty) {
+                return (
+                    <div>
+                        <HeaderComponent userName={LoginService.id}></HeaderComponent>
+                        {this.state.order.map(
+                            order =>
 
-                        <div className="head2" key={order.orderId} >
-                            <h3>UserName : {order.orderId}</h3>
-                            <h3>Date : {order.orderDate}</h3>
-                            <h3>Total Price : {order.totalPrice}</h3>
-                            <h3>Order Status : {order.orderStatus}</h3>
+                                <div className="head2" key={order.orderId} >
+                                    <h3>UserName : {order.orderId}</h3>
+                                    <h3>Date : {order.orderDate}</h3>
+                                    <h3>Total Price : {order.totalPrice}</h3>
+                                    <h3>Order Status : {order.orderStatus}</h3>
 
-                            <div className="contant2">
-                                {
-                                    order.items.map(
-                                        list =>
+                                    <div className="contant2">
+                                        {
+                                            order.items.map(
+                                                list =>
 
-                                            <div className="card2" key={list.product.productId}>
-                                                <div className="cardBody2">
-                                                    <h5 className="card1-title">{list.product.productName}</h5>
-                                                    <h6 className="price2">${list.product.price}</h6>
-                                                    <h6 className="category2">Quantity : {list.quantity}</h6>
-                                                    <h6 className="category2" >SubTotal : {list.subTotal}</h6><br />
-                                                </div>
+                                                    <div className="card2" key={list.product.productId}>
+                                                        <div className="cardBody2">
+                                                            <h5 className="card1-title">{list.product.productName}</h5>
+                                                            <h6 className="price2">${list.product.price}</h6>
+                                                            <h6 className="category2">Quantity : {list.quantity}</h6>
+                                                            <h6 className="category2" >SubTotal : {list.subTotal}</h6><br />
+                                                        </div>
 
-                                            </div>
-                                    )}
-                            </div>
-                            <br />
+                                                    </div>
+                                            )}
+                                    </div>
+                                    <br />
 
+                                </div>
+                        )}
+                        <div className="remo">
+                            <Link className="remove4" to={'/allorder'} >All Order</Link>
                         </div>
-                )}
-                <div className="remo">
-                    <Link className="remove4" to={'/allorder'} >All Order</Link>
-                </div>
-            </div>
+                    </div>
 
-        )
+                )
+            }
+            else {
+                <div>
+                    <HeaderComponent userName={LoginService.id}></HeaderComponent>
+
+                    <div className='head1'>
+                        <h2>No Order made Today</h2>
+                    </div>
+                </div>
+            }
+        }
+        else {
+            return (
+                <div>
+                    <HeaderComponent userName={LoginService.id}></HeaderComponent>
+
+                    <div className='head1'>
+                        <h2>Please Login to Access Order Services</h2>
+                        <Link className='regBtn3' to={"/login"}>SignIn / SignUp</Link>
+                    </div>
+                </div>
+            )
+        }
     }
 }
 

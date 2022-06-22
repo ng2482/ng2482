@@ -35,7 +35,7 @@ export class AllOrders extends Component {
             <div>
                 <HeaderComponent userName={LoginService.id}></HeaderComponent>
                 <div className="remove2">
-                    <Link className="remove3" to={'/toorder'} >Todays Orders</Link>
+                    <Link className="rem" to={'/toorder'} >Todays Orders</Link>
                 </div>
                 {this.state.order.map(
                     order =>

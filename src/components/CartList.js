@@ -13,7 +13,7 @@ export class CartList extends Component {
         this.state = {
             cart: {},
             productlist: [],
-            quantity: 0
+            empty: false
         }
     }
     componentDidMount() {
@@ -27,10 +27,10 @@ export class CartList extends Component {
 
     getCart() {
         CartService.getCart(LoginService.id).then(res => {
-            this.setState({ cart: res.data, productlist: res.data.items });
             if (res.data.items != null) {
                 this.setState({ productlist: res.data.items })
-                this.setState({ quantity: res.data.items.quantity })
+                this.setState({ cart: res.data })
+                this.setState({ empty: true })
             }
         }
         );
@@ -76,45 +76,60 @@ export class CartList extends Component {
         }
     }
 
+
     render() {
-        return (
-            <div>
-                <HeaderComponent userName={LoginService.id}></HeaderComponent>
+        if (this.state.empty) {
+            return (
+                <div>
+                    <HeaderComponent userName={LoginService.id}></HeaderComponent>
 
-                <div className="head1" >
-                    <h3>UserName : {this.state.cart.cartId}</h3>
-                    <h3>Total Price : {this.state.cart.totalPrice}</h3>
-                    <div className="contant1">
-                        {
-                            this.state.productlist.map(
-                                list =>
+                    <div className="head1" >
+                        <h3>UserName : {this.state.cart.cartId}</h3>
+                        <h3>Total Price : {this.state.cart.totalPrice}</h3>
+                        <div className="contant1">
+                            {
+                                this.state.productlist.map(
+                                    list =>
 
-                                    <div className="card1" key={list.product.productId}>
-                                        <div className="cardBody1">
-                                            <h5 className="card1-title">{list.product.productName}</h5>
-                                            <h6 className="price1">${list.product.price}</h6>
-                                            <h6 className="category1">Quantity :
-                                                <input type="number" value={list.quantity} className="category1" min="1" name="quantity" onChange={e => this.cartUpdate(e, list.product.productId)} />
-                                            </h6>
-                                            <h6 className="category1" >SubTotal : {list.subTotal}</h6><br />
-                                            <div className="remove2">
-                                                <button className="remove1" onClick={() => this.deleteItem(list.product.productId)}>Remove</button>
+                                        <div className="card1" key={list.product.productId}>
+                                            <div className="cardBody1">
+                                                <h5 className="card1-title">{list.product.productName}</h5>
+                                                <h6 className="price1">${list.product.price}</h6>
+                                                <h6 className="category1">Quantity :
+                                                    <input type="number" value={list.quantity} className="category1" min="1" name="quantity" onChange={e => this.cartUpdate(e, list.product.productId)} />
+                                                </h6>
+                                                <h6 className="category1" >SubTotal : {list.subTotal}</h6><br />
+                                                <div className="remove2">
+                                                    <button className="remove1" onClick={() => this.deleteItem(list.product.productId)}>Remove</button>
+                                                </div>
+
                                             </div>
 
                                         </div>
+                                )}
+                        </div>
+                        <br />
+                        <div className="rem">
+                            <button className="remove3" onClick={() => this.placeOrder()} >Order</button>
 
-                                    </div>
-                            )}
-                    </div>
-                    <br />
-                    <div className="rem">
-                        <button className="remove3" onClick={() => this.placeOrder()} >Order</button>
-
-                        <button className="remove1" onClick={() => this.clearCart()}>Clear</button>
+                            <button className="remove1" onClick={() => this.clearCart()}>Clear</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
+
+        else {
+            return (
+                <div>
+                    <HeaderComponent userName={LoginService.id}></HeaderComponent>
+
+                    <div className='head1'>
+                        <h2>Add items to Cart</h2>
+                    </div>
+                </div>
+            )
+        }
     }
 }
 
