@@ -1,3 +1,6 @@
+
+"use strict";
+
 import { createCipheriv, createDecipheriv, randomBytes, createHash } from 'crypto';
 
 class PaytmChecksum {
