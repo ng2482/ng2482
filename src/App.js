@@ -7,9 +7,11 @@ import SignupForm from './components/SignupForm';
 import UserDetails from './components/UserDetails';
 import UserDelete from './components/UserDelete';
 import UserUpdate from './components/UserUpdate';
-import CartList from './components/CartList';
 import Logout from './components/Logout';
 import { PaytmButton } from './components/paytmButton';
+import CartListFunction from './components/CartList';
+import { TodayOrders } from './components/TodayOrders';
+import { AllOrders } from './components/AllOrders';
 
 function App() {
 
@@ -27,9 +29,13 @@ function App() {
               <Route path='/profile' element={<UserDetails />}></Route>
               <Route path='/update' element={<UserUpdate />}></Route>
               <Route path='/delete' element={<UserDelete />}></Route>
-              <Route path='/cart' element={<CartList />}></Route>
+              <Route path='/cart' element={<CartListFunction />}></Route>
               <Route path='/logout' element={<Logout />}></Route>
               <Route path='/pay' element={<PaytmButton />}></Route>
+              <Route path='/toorder' element={<TodayOrders />}></Route>
+              <Route path='/allorder' element={<AllOrders />}></Route>
+
+
 
 
             </Routes>

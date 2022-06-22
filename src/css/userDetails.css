@@ -1,3 +1,8 @@
+body {
+	margin-top: 5%;
+	margin-bottom: 3%;
+}
+
 .Name {
 	background-color: #3e637b;
 	padding-bottom: 5px;
@@ -16,7 +21,6 @@ hr {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	margin: auto;
-	margin-top: 6%;
 	font-size: 25px;
 	border-radius: 25px;
 	background-color: white;
@@ -28,8 +32,8 @@ hr {
 	padding-bottom: 10px;
 	align-self: center;
 	width: 50%;
-	margin-left: 25%;
 	border-radius: 25px;
+	margin: auto;
 
 }
 

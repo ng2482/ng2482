@@ -1,31 +1,38 @@
-.fixed-header, .fixed-footer{
+.fixed-header,
+.fixed-footer {
     width: 100%;
     left: 0px;
     right: 0px;
-    position: fixed;    
-    background-color: #026cbb;        
+    position: fixed;
+    background-color: #026cbb;
     color: #fff;
-    padding-bottom: 0.5%;
-    
+    padding-bottom: 10px;
+
 }
-.fixed-header{
+
+.fixed-header {
     top: 0;
+
 }
-.fixed-footer{
+
+.fixed-footer {
     bottom: 0;
 }
-.container{
+
+.container {
     width: 100%;
     left: 0px;
 }
-nav a{
+
+nav a {
     color: #fff;
     padding-left: 5%;
     right: 0px;
     display: inline-block;
     text-decoration: none;
 }
-.logo{
+
+.logo {
     font-size: 40px;
     padding-right: 100px;
 }

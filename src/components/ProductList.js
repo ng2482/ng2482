@@ -44,7 +44,7 @@ class ProductList extends Component {
                         this.state.products.map(
                             product =>
                                 <div className="card" key={product.productId}>
-                                    <img className="cardImg" src={`./image/${product.image}`} alt="Card image cap"></img>
+                                    <img className="cardImg" src={`./image/${product.image}`} alt={`${product.image}`}></img>
                                     <div className="cardBody">
                                         <h5 className="card-title" >{product.productName}</h5>
                                         <h6 className="price">${product.price}</h6>

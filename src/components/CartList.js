@@ -3,9 +3,10 @@ import CartService from '../service/CartService';
 import LoginService from '../service/LoginService';
 import HeaderComponent from './HeaderComponent';
 import '../css/cartStyle.css'
-import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import OrderService from '../service/OrderService';
 
-export default class CartList extends Component {
+export class CartList extends Component {
     constructor(props) {
         super(props)
 
@@ -18,6 +19,7 @@ export default class CartList extends Component {
     componentDidMount() {
         this.getCart();
     }
+
 
     componentDidUpdate() {
         this.getCart();
@@ -63,8 +65,15 @@ export default class CartList extends Component {
         CartService.deleteCart(LoginService.id)
     }
 
-    placeOrder() {
-        axios.post(`http://localhost:9005/submitPaymentDetail/by2900/900/by2900`)
+    async placeOrder() {
+        if (this.state.cart.totalPrice !== 0) {
+            var cartDetails = await OrderService.addOrder(LoginService.id);
+            OrderService.orderId(cartDetails.data.orderId);
+            this.props.navigate("/pay")
+        }
+        else {
+            alert("Add Items to Cart")
+        }
     }
 
     render() {
@@ -98,7 +107,7 @@ export default class CartList extends Component {
                             )}
                     </div>
                     <br />
-                    <div className="remove2">
+                    <div className="rem">
                         <button className="remove3" onClick={() => this.placeOrder()} >Order</button>
 
                         <button className="remove1" onClick={() => this.clearCart()}>Clear</button>
@@ -108,3 +117,26 @@ export default class CartList extends Component {
         )
     }
 }
+
+
+function CartListFunction() {
+    const navigate = useNavigate();
+    if (LoginService.id !== "Profile") {
+        return (
+            <CartList navigate={navigate}></CartList>
+        )
+    }
+    else {
+        return (
+            <div>
+                <HeaderComponent userName={LoginService.id}></HeaderComponent>
+                <div className='head1'>
+                    <h2>Please Login to Access Cart service</h2>
+                    <Link className="regBtn3" to={"/login"}>SignIn / SingUp</Link>
+                </div>
+            </div>
+        )
+    }
+}
+
+export default CartListFunction

@@ -1,13 +1,13 @@
 body {
     margin-top: 5%;
-    margin-bottom: 2%;
+    margin-bottom: 3%;
 }
 
-.collection1 {
+.collection2 {
     padding-top: 15%;
 }
 
-.contant1 {
+.contant2 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 5px;
@@ -16,7 +16,7 @@ body {
 
 }
 
-.card1 {
+.card2 {
     border: 1px black solid;
     border-radius: 25px;
 
@@ -36,14 +36,14 @@ body {
     margin: 1px;
 }
 
-.card1 .price1 {
+.card2 .price2 {
     text-align: center;
     color: #7e7e7c;
     font-size: 15px;
     margin: 1px;
 }
 
-.card1 .category1 {
+.card2 .category2 {
     text-align: center;
     color: #7e7e7c;
     font-size: 15px;
@@ -51,14 +51,14 @@ body {
     border-radius: 25px;
 }
 
-.card1 .add1 {
+.card2 .add2 {
     width: 100%;
     background-color: #74f288;
     text-align: center;
     align-content: center;
 }
 
-.head1 {
+.head2 {
     background-color: white;
     width: 99%;
     border-radius: 25px;
@@ -70,7 +70,7 @@ body {
 
 }
 
-.remove1 {
+.remove2 {
     background-color: #ee6a63fb;
     border: 1px solid black;
     width: 20%;
@@ -86,7 +86,7 @@ body {
     margin-right: 10px;
 }
 
-.remove3 {
+.remove4 {
     background-color: #026cbb;
     border: 1px solid black;
     width: 20%;
@@ -102,7 +102,7 @@ body {
     margin-right: 10px;
 }
 
-.button1 {
+.button2 {
     width: 100%;
     background-color: #74f288;
     border: 0px;
@@ -110,7 +110,7 @@ body {
 
 }
 
-.regBtn3 {
+.regBtn4 {
     width: 40%;
     padding: 12px 20px;
     margin: 8px 0;

@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react"
+import OrderService from "../service/OrderService";
+import LoginService from '../service/LoginService';
+import HeaderComponent from "./HeaderComponent";
+import '../css/payment.css'
+import CartService from "../service/CartService";
+
 const PaytmChecksum = require('./paytmChecksum').default;
 const https = require('https');
 
 export function PaytmButton() {
-
   const [paymentData, setPaymentData] = useState({
     token: "",
     order: "",
@@ -16,8 +21,14 @@ export function PaytmButton() {
     initialize();
   }, []);
 
-  const initialize = () => {
-    let orderId = 'Order_' + new Date().getTime();
+
+
+  const initialize = async e => {
+
+    var cartDetails = await OrderService.getOrder(OrderService.id);
+    let amount = cartDetails.data.totalPrice;
+    let custId = cartDetails.data.customerId;
+    let orderId = cartDetails.data.orderId;
 
     // Sandbox Credentials
     let mid = "wtYSWO67585826770371"; // Merchant ID
@@ -31,11 +42,11 @@ export function PaytmButton() {
       "orderId": orderId,
       "callbackUrl": "https://merchant.com/callback",
       "txnAmount": {
-        "value": 100,
+        "value": amount,
         "currency": "INR",
       },
       "userInfo": {
-        "custId": '1001',
+        "custId": custId,
       }
     };
 
@@ -76,7 +87,7 @@ export function PaytmButton() {
             token: JSON.parse(response).body.txnToken,
             order: orderId,
             mid: mid,
-            amount: 100
+            amount: amount
           })
         });
       });
@@ -134,6 +145,12 @@ export function PaytmButton() {
       "handler": {
         "transactionStatus": function transactionStatus(paymentStatus) {
           console.log("paymentStatus => ", paymentStatus);
+          OrderService.updateOrder(paymentData.order);
+          CartService.deleteCart(LoginService.id)
+          console.log(paymentData.order)
+          alert("Payment Successfull /n Order placed")
+          alert("Please Login Agian")
+          window.location = "/"
           setLoading(false);
         },
         "notifyMerchant": function notifyMerchant(eventName, data) {
@@ -159,11 +176,27 @@ export function PaytmButton() {
     <div>
       {
         loading ? (
-          <img src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" />
+          <img alt="" src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" />
         ) : (
-          <button onClick={makePayment}>Pay Now</button>
-        )
-      }
+          <div>
+            <HeaderComponent userName={LoginService.id}></HeaderComponent>
+
+            <div className="register-Form1">
+              <h1 align="center">Payment</h1>
+              <hr></hr>
+
+
+              <label><b>OrderId</b></label>
+              <input type="text" className='register' defaultValue={paymentData.order} />
+
+              <label><b>Amount</b></label>
+              <input type="text" className='register' defaultValue={paymentData.amount} />
+
+              <button className="regBtn2" onClick={makePayment}>Pay Now</button>
+            </div>
+          </div>
+        )}
+
     </div>
   )
 }
