@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import bcryptjs from 'bcryptjs';
 import '../css/loginStyle.css';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import LoginService from '../service/LoginService';
 import HeaderComponent from './HeaderComponent';
 
-function LoginForm() {
+function LoginForm(props) {
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const errors = {
@@ -31,7 +31,16 @@ function LoginForm() {
       } else {
         alert(`welcome ${userDetails.data.fullName}`);
         LoginService.userId(uname.value)
+        LoginService.userRole(userDetails.data.role)
+        if (userDetails.data.role === "user") {
+          props.navigate("/products")
+        }
+        else {
+          props.navigate("/admin")
+        }
+        console.log(userDetails.data.role)
         setIsSubmitted(true);
+
       }
     } else {
       // Username not found
@@ -48,7 +57,7 @@ function LoginForm() {
     window.location = '/register';
   };
 
-  const renderForm = (
+  return (
     <div>
       <HeaderComponent userName={LoginService.id}></HeaderComponent>
 
@@ -83,18 +92,16 @@ function LoginForm() {
 
   );
 
-
-  return (
-
-    <div className="app">
-      <div className="login-form">
-        {isSubmitted ? <Navigate to={'/products'}>User is successfully logged in</Navigate> : renderForm}
-      </div>
-    </div>
-  );
-
 }
-export default LoginForm;
+
+function LoginPage() {
+  const navigate = useNavigate();
+  return (
+    <LoginForm navigate={navigate}></LoginForm>
+  )
+}
+
+export default LoginPage
 
 
 

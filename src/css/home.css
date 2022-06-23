@@ -58,7 +58,7 @@ body {
     margin: 1px;
 }
 
-.card .add {
+.card {
     width: 100%;
     background-color: #74f288;
     text-align: center;
@@ -89,9 +89,20 @@ body {
 }
 
 .button {
-    width: 100%;
+    width: 50%;
     background-color: #74f288;
     border: 0px;
     border-radius: 25px;
+    margin-top: 10px;
+    padding: 10px;
 
+}
+
+.button12 {
+    width: 50%;
+    background-color: #ee3434;
+    border: 0px;
+    border-radius: 25px;
+    margin-top: 10px;
+    padding: 10px;
 }

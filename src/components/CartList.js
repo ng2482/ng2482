@@ -99,7 +99,7 @@ export class CartList extends Component {
                                                     <input type="number" value={list.quantity} className="category1" min="1" name="quantity" onChange={e => this.cartUpdate(e, list.product.productId)} />
                                                 </h6>
                                                 <h6 className="category1" >SubTotal : {list.subTotal}</h6><br />
-                                                <div className="remove2">
+                                                <div className="remo">
                                                     <button className="remove1" onClick={() => this.deleteItem(list.product.productId)}>Remove</button>
                                                 </div>
 
