@@ -31,6 +31,7 @@ function LoginForm(props) {
       } else {
         alert(`welcome ${userDetails.data.fullName}`);
         LoginService.userId(uname.value)
+        LoginService.userPassword(pass.value)
         LoginService.userRole(userDetails.data.role)
         if (userDetails.data.role === "user") {
           props.navigate("/products")

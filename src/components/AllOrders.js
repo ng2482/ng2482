@@ -41,7 +41,7 @@ export class AllOrders extends Component {
                     order =>
 
                         <div className="head1" key={order.orderId} >
-                            <h3>UserName : {order.orderId}</h3>
+                            <h3>OrderId : {order.orderId}</h3>
                             <h3>Date : {order.orderDate}</h3>
                             <h3>Total Price : {order.totalPrice}</h3>
                             <h3>Order Status : {order.orderStatus}</h3>

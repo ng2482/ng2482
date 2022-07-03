@@ -18,14 +18,14 @@ class AdminProductList extends Component {
     }
 
     componentDidMount() {
-        ProductService.getProducts().then(res => {
+        ProductService.getProductsAdmin().then(res => {
             this.setState({ products: res.data });
         }
         );
     }
 
     componentDidUpdate() {
-        ProductService.getProducts().then(res => {
+        ProductService.getProductsAdmin().then(res => {
             this.setState({ products: res.data });
         }
         );
