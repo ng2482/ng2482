@@ -71,9 +71,7 @@ const UserUpdate = () => {
                 }
             }
 
-            await axios.put(`http://localhost:9001/user/update/${LoginService.id}`, user).then(res => {
-                console.log(res);
-            });
+            LoginService.updateUser(LoginService.id, user);
 
 
 

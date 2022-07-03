@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+const order_url = "http://localhost:8079/api/order/user/";
 class OrderService {
     constructor() {
         this.id = null;
@@ -9,19 +10,19 @@ class OrderService {
         this.id = id;
     }
     async addOrder(username) {
-        return await axios.post(`http://localhost:8079/api/order/user/addOrder/${username}`)
+        return await axios.post(order_url + `addOrder/${username}`)
     }
     async updateOrder(orderId) {
-        axios.put(`http://localhost:9004/user/updateOrder/${orderId}`)
+        axios.put(order_url + `updateOrder/${orderId}`)
     }
     async getOrder(orderId) {
-        return await axios.get(`http://localhost:8079/api/order/user/getByOrderId/${orderId}`)
+        return await axios.get(order_url + `getByOrderId/${orderId}`)
     }
     async getUserOrder(username) {
-        return await axios.get(`http://localhost:8079/api/order/user/getTodaysOrders/${username}`)
+        return await axios.get(order_url + `getTodaysOrders/${username}`)
     }
     async getUserAllOrder(username) {
-        return await axios.get(`http://localhost:8079/api/order/user/getOrder/${username}`)
+        return await axios.get(order_url + `getOrder/${username}`)
     }
 
 

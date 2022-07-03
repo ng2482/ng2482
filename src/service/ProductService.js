@@ -20,15 +20,15 @@ class ProductService {
     }
 
     async updateProduct(product) {
-        return await axios.put(`http://localhost:9002/admin/update/${this.id}`, product);
+        return await axios.put(admin_url + `update/${this.id}`, product);
     }
 
     async addProduct(product) {
-        return await axios.post(`http://localhost:9002/admin/addProduct/`, product);
+        return await axios.post(admin_url + `addProduct/`, product);
     }
 
     async deleteProduct(productId) {
-        return await axios.delete(`http://localhost:9002/admin/deleteproduct/${productId}`);
+        return await axios.delete(admin_url + `deleteproduct/${productId}`);
     }
 }
 const instance = new ProductService()

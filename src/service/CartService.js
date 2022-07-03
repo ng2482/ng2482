@@ -6,19 +6,19 @@ class CartService {
         return axios.get(cart_url + `getcart/${cartId}`);
     }
     addToCart(username, productId) {
-        axios.post(`http://localhost:8079/api/cart/user/additem/${username}/${productId}`)
+        axios.post(cart_url + `additem/${username}/${productId}`)
     }
 
     updateCart(username, productId, quantity) {
-        axios.put(`http://localhost:9003/user/updateitem/${username}/${productId}/${quantity}`)
+        axios.put(cart_url + `updateitem/${username}/${productId}/${quantity}`)
     }
 
     deleteCartItem(username, productId) {
-        axios.delete(`http://localhost:9003/user/deleteitem/${username}/${productId}`)
+        axios.delete(cart_url + `deleteitem/${username}/${productId}`)
     }
 
     deleteCart(username) {
-        axios.delete(`http://localhost:9003/user/deletecart/${username}`)
+        axios.delete(cart_url + `deletecart/${username}`)
     }
 }
 

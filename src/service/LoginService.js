@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const user_url = "http://localhost:9001/user/";
+const user_url = "http://localhost:8079/api/user/user/";
 class LoginService {
     constructor() {
         this.id = "Profile";
@@ -20,8 +20,12 @@ class LoginService {
     }
 
     async getDetails(username) {
-        var userDetails = await axios.get(user_url + `${username}`);
+        var userDetails = await axios.get(user_url + `${username}`).catch(err => { console.log(err) });
         return userDetails;
+    }
+
+    updateUser(username, user) {
+        axios.put(user_url + `update/${username}`, user)
     }
 
     deleteUser(userName) {
